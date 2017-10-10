@@ -2,8 +2,14 @@
 var str = 'test';
 
 //missed semicolon
-Hello()
+hello()
 
-function Hello(){
+var counter = 1;
+
+function hello(){
+    //empty block statement
+    if (counter === 2){
+    }
+
     console.log("Hello");
 }
