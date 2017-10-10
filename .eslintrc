@@ -1,0 +1,11 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "node": true
+    },
+    "rules": {
+        "semi": ["warn", "always"],
+        "quotes": ["warn", "double"]
+    }
+  }
