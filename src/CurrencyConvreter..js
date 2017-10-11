@@ -7,7 +7,7 @@ function convertUahTo(quantity, currency){
             return quantity * getUsd();
             break;
         default:
-            return "error";
+            return `Currency ${currency} is not supported.`;
 
     }
 }

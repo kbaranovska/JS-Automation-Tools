@@ -18,8 +18,9 @@ describe('convertUahTo', function () {
     it('not supported currency returns Error', function() {
         
         var quantity = 100;
-        var convertedValue = convertUahTo(quantity, "cad");
+        var currency = "cad";
+        var convertedValue = convertUahTo(quantity, currency);
 
-        expect(convertedValue).toEqual("error");
+        expect(convertedValue).toEqual(`Currency ${currency} is not supported.`);
     });
 });
