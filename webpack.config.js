@@ -1,11 +1,18 @@
-  var path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require('webpack');
+const path = require("path");
 
   module.exports = {
-    entry: "./src/app.js",
+    entry: {
+      main: "./src/app.js",
+      vendors: "./src/vendors.js"
+   },
+   
     output: {
       path: path.join(__dirname, "build"),
       publicPath: "/build/",
-      filename: "bundle.js"
+      filename: "[name].js"
     },
 
     module: {
@@ -18,6 +25,23 @@
             presets: ['es2015']
           }
         },
-        { test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"] },]
-    }
+        { test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"] },
+        {
+          test: /\.css$/,
+          use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: "css-loader"
+          })
+        }
+      ]
+    },
+
+    plugins: [
+      new ExtractTextPlugin("styles.css"),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendors',
+        minChunks: Infinity
+      }),
+      new BundleAnalyzerPlugin()
+    ]
 };

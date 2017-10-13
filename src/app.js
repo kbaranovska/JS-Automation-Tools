@@ -1,8 +1,16 @@
+import lodash from 'lodash';
+import jquery from 'jquery';
+
+document.addEventListener('DOMContentLoaded',function() {
+    document.querySelector('#output').innerHTML = hello();
+},false);
+
+
 //string should be doublequote
 var str = 'test';
 
 //missed semicolon
-hello()
+goodBye()
 
 var counter = 1;
 
@@ -12,4 +20,9 @@ function hello(){
     }
 
     console.log("Hello");
+    return "Hello";
+}
+
+function goodBye(){
+console.log("Hello");
 }
