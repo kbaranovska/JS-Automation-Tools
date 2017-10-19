@@ -1,5 +1,7 @@
-import lodash from 'lodash';
-import jquery from 'jquery';
+import * as lodash from 'lodash';
+import * as jquery from 'jquery';
+
+const styles = require('../scss/main.scss');
 
 document.addEventListener('DOMContentLoaded',function() {
     document.querySelector('#output').innerHTML = hello();
