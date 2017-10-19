@@ -3,45 +3,44 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const webpack = require('webpack');
 const path = require("path");
 
-  module.exports = {
-    entry: {
-      main: "./src/app.js",
-      vendors: "./src/vendors.js"
-   },
-   
-    output: {
-      path: path.join(__dirname, "build"),
-      publicPath: "/build/",
-      filename: "[name].js"
-    },
+module.exports = {
+  entry: {
+    main: "./src/app.js",
+    vendors: "./src/vendors.js"
+  },
 
-    module: {
-      rules: [
-        { 
-          test: /\.js$/,
-          include: path.join(__dirname, 'src'),
-          loader: 'babel-loader',
-          query: {
-            presets: ['es2015']
-          }
-        },
-        { test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"] },
-        {
-          test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            fallback: "style-loader",
-            use: "css-loader"
-          })
+  output: {
+    path: path.join(__dirname, "build"),
+    publicPath: "/build/",
+    filename: "[name].js"
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: path.join(__dirname, 'src'),
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015']
         }
-      ]
-    },
-
-    plugins: [
-      new ExtractTextPlugin("styles.css"),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendors',
-        minChunks: Infinity
-      }),
-      new BundleAnalyzerPlugin()
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
+      }
     ]
+  },
+
+  plugins: [
+    new ExtractTextPlugin("styles.css"),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors',
+      minChunks: Infinity
+    }),
+    new BundleAnalyzerPlugin()
+  ]
 };
